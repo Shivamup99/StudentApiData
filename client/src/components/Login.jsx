@@ -30,17 +30,13 @@ function Login() {
   const submitForm = async() => {
     try {
       console.log(user)
-      const {data} =await axios.post('http://localhost:8080/api/user/login',user)
+      const {data} =await axios.post('api/user/login',user)
       console.log(data)
       localStorage.setItem("token",data.token)
       localStorage.setItem("roles",data.roles)
       localStorage.setItem("_id",data._id)
-      //history.push("/")
-      if(data.roles==='admin'){
-      window.location="/users"
-      } else{
-        window.location='/cget'
-      }
+      //history.push("/home")
+      window.location="/home"
     } catch (ex) {
      
         setError(<p className="alert alert-danger">Incorrect login credentials i.e. userHandle/email or password!</p>)

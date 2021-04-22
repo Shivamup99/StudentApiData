@@ -35,7 +35,7 @@ function Cadd() {
     const submitForm = async()=>{
       try {
         console.log(courses)
-        let result = await axios.put(`http://localhost:8080/api/user/course/put/${_id._id}`)
+        let result = await axios.put(`api/user/course/put/${_id._id}`)
           history.push("/student")
       } catch (error) {
         setError(alert('Already taken'))
@@ -43,7 +43,7 @@ function Cadd() {
     };
 
      const loadCourse = async () =>{
-         const result = await axios.get(`http://localhost:8080/api/user/course/${_id._id}`)
+         const result = await axios.get(`api/user/course/${_id._id}`)
          setCourses(result.data)
          console.log(result.data)
      }

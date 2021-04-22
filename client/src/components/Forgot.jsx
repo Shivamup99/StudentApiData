@@ -22,13 +22,8 @@ function Forgot() {
     }
     const submitForm = async() => {
         console.log(user)
-        await axios.put('http://localhost:8080/api/user/forgot',user)
+        await axios.put('api/user/forgot',user)
         alert('Email send successfully')
-        // setUser('')
-        // setTimeout(()=>{
-        //     console.log('timeout')
-        // },3000)
-      
     }
 
     return (

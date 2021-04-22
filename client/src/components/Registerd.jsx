@@ -21,7 +21,7 @@ function Registerd() {
     }, [])
 
     const loadUser = async()=>{
-        const result = await axios.get('http://localhost:8080/api/user/users')
+        const result = await axios.get('api/user/users')
         setUsers(result.data)
         //  let pic = await result.data.photo.replace("public/","")
         //  setProfile(pic)
@@ -30,7 +30,7 @@ function Registerd() {
     }
 
     const deleteUser = async(_id)=>{
-      const response = await axios.delete(`http://localhost:8080/api/user/remove/${_id}`)
+      const response = await axios.delete(`api/user/remove/${_id}`)
       console.log(response)
       loadUser();
     }

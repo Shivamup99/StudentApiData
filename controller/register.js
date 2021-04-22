@@ -199,7 +199,7 @@ router.put('/resetpassword',async(req,res)=>{
     }
 })
 
-router.get("/users",async(req,res)=>{
+router.get("/users",auth,async(req,res)=>{
     try {
         const user = await User.find({}).select('-password -cpassword  -__v -created_at')
         res.status(200).json(user)
@@ -210,9 +210,9 @@ router.get("/users",async(req,res)=>{
 })
 
 
-router.get("/users/:_id",async(req,res)=>{
+router.get("/users/:_id" ,auth,async(req,res)=>{
     try {
-        const user = await User.findById({_id:req.params._id}).select('-password -cpassword -__v -created_at')
+        const user = await User.findById({_id:req.params._id}).select('-password -cpassword -__v -created_at -record')
         res.status(200).json(user)
     } catch (error) {
         res.status(422).json({message:error.message})

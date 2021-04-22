@@ -38,24 +38,25 @@ function App() {
     <div className="App">
       <Navbar user={users}/>
       <Switch>
-        <Route path='/' exact render={props=>{
+      {/*   <Route path='/' exact render={props=>{
           if(!users) return <Redirect to="/login"/>
           return <Home {...props} />
-        }} />
-        <Route path='/view' render={user=><View {...user} user={users}/>} /> 
+        }} /> */}
+        <Route  path='/' exact component={Home}></Route>
+        <Route path='/view'  component={View} /> 
          {/* <Route path='/myprofile/:_id' component={Profile} />  */}
-        <Route path='/edit/:_id' component={Edit}/> 
-        <Route path ='/register' component={Register} />
-        <Route path ="/users" component={Registerd}/>
-        <Route path = "/login" component={Login}/>
-        <Route path = "/logout" component={Logout}/>
-        <Route path = '/course' component={Course} />
-        <Route path = '/student' user={users} component={Student} />
-        <Route path = '/subject' component={Subject}/>
-        <Route path = '/cget' component={Cget} />
-        <Route path = '/cadd/:_id' component={Cadd} />
-        <Route path = '/forgot' component={Forgot}/>
-        <Route path = '/resetpassword/:token' component={Reset}/>
+        <Route path='/edit/:_id'  component={Edit}/> 
+        <Route path ='/register'  component={Register} />
+        <Route path ="/users"  component={Registerd}/>
+        <Route path = "/login"  component={Login}/>
+        <Route path = "/logout"  component={Logout}/>
+        <Route path = '/course'  component={Course} />
+        <Route path = '/student'   component={Student} />
+        <Route path = '/subject'  component={Subject}/>
+        <Route path = '/cget'  component={Cget} />
+        <Route path = '/cadd/:_id'  component={Cadd} />
+        <Route path = '/forgot'  component={Forgot}/>
+        <Route path = '/resetpassword/:token'  component={Reset}/>
       </Switch> 
     </div>
   );

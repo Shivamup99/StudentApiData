@@ -27,7 +27,7 @@ function Course() {
 
     const submitForm = async(e)=>{
         console.log(courses)
-        await axios.post('http://localhost:8080/api/user/course/post',courses)
+        await axios.post('api/user/course/post',courses)
         window.location="/course"
     };
 

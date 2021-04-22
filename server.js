@@ -12,7 +12,7 @@ require('./models/db')
 require("express-async-errors")
 const bodyParser = require('body-parser')
 const cookieParser = require('cookie-parser')
-const port = process.env.PORT || 8080
+const port = process.env.PORT || 8000
 const user = require("./controller/register")
 const record = require("./controller/user")
 const course = require("./controller/course")
@@ -48,7 +48,7 @@ app.use(express.static(__dirname + '/public'));
 
  if(process.env.NODE_ENV=="production"){
      app.use(express.static("client/build"))
-      app.get("*",(req,res)=>{
+      app.get("/*",(req,res)=>{
           res.sendFile(path.resolve(__dirname ,'client','build','index.html'))
       })
  }

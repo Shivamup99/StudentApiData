@@ -9,7 +9,7 @@ function Student() {
     },[])
 
     const loadStudent = async()=>{
-        let result = await axios.get(`http://localhost:8080/api/user/course/get/${ localStorage.getItem('_id')}`)
+        let result = await axios.get(`api/user/course/get/${ localStorage.getItem('_id')}`)
         setStudent(result.data)
         console.log(result.data)
         let str=result.data.photo.replace("public/", "")
@@ -28,7 +28,7 @@ function Student() {
             </div>
                   
                 <ul className="list-group list-group-flush">
-                <img className="list-group-item" src={`http://localhost:8080/${profile}`} alt='avtar'/> 
+                <img className="list-group-item" src={`${profile}`} alt='avtar'/> 
                 <li className="list-group-item">Student_Id : {student._id}</li>
                   <li className="list-group-item">Name : {student.name}</li>
                   <li className="list-group-item">Email : {student.email}</li>

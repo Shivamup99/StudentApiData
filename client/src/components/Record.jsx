@@ -35,7 +35,7 @@ function Record() {
   const submitForm = async() => {
    try {
     console.log(user)
-    await axios.post('http://localhost:8080/api/user/data/record/',user);
+    await axios.post('api/user/data/record/',user);
     //history.push(`/view ${user._id}`)
    } catch (error) {
        console.log(error)

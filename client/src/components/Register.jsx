@@ -55,7 +55,7 @@ function Form() {
     }
       console.log(user)
       console.log(photo)
-      const response = await axios.post('http://localhost:8080/api/user/register',formData);
+      const response = await axios.post('api/user/register',formData);
       localStorage.setItem("token",response.headers['x-api-key'])
       history.push("/login")
     } catch (error) {

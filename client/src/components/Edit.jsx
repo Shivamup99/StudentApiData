@@ -16,7 +16,7 @@ const schema = yup.object().shape({
 
 function Form() {
     let history = useHistory()
-    let _id = useParams()
+    const _id = useParams()
 
     const [user,setUser] = useState({
         name:'' , email:'',phone:'',department:''
@@ -44,34 +44,36 @@ function Form() {
     formData.append("department",user.department)
     formData.append("photo",photo)
     console.log(user)
-     const result= await axios.put(`http://localhost:8080/api/user/update/${_id._id}`,formData);
+     const result= await axios.put(`api/user/update/${_id._id}`,formData);
      setUser(result.data)
      let pic = result.data.photo.replace("public/","")
      setProfile(pic)
-    history.push("/users")
-
   };
+   
     useEffect(() => {
     loadUser()
    }, [])
 
   const loadUser = async()=>{
-    const result=  await axios.get(`http://localhost:8080/api/user/users/${_id._id}`)
-      console.log(result)
-      setUser(result.data)
-      let pic = result.data.photo.replace("public/","")
-      setProfile(pic)
+   // console.log(id)
+   await axios.get(`http://localhost:8000/api/user/users/${_id._id}`).then((result)=>{
+    console.log(result)
+    setUser(result.data)
+    let pic = result.data.photo.replace("public/","")
+    setProfile(pic)
+   }).catch((err)=>console.log(err))
+    
   }
   return (
     <div className="Form">
       <div className="title">Update Profile</div>
       <div className="inputs">
         <form onSubmit={handleSubmit(e=>submitForm(e))}>
-        <img className="list-group-item" src={`http://localhost:8080/${profile}`} alt='avtar'/> 
+        <img className="list-group-item" src={`http://localhost:8000/${profile}`} alt='avtar'/> 
 
         <lable htmlFor ="photo" >Change Pic</lable>
           <input type="file" name="photo" className="form-control-file" 
-           ref={register} onChange={e=>handlePhoto(e)} /> 
+           ref={register} onChange={e=>handlePhoto(e)} required={false} /> 
 
           <input
             type="text"
@@ -111,7 +113,6 @@ function Form() {
           <p> {errors.department?.message} </p>
 
          <button type="submit" className="btn btn-primary">Update</button>
-         {/* <Link className="btn btn-success ml-2" to={`/profile/${user._id}`}>Profile</Link> */}
         </form>
       </div>
     </div>

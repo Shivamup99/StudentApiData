@@ -13,13 +13,13 @@ function Cread() {
 
 
     const loadCourse=async()=>{
-        const result = await axios.get('http://localhost:8080/api/user/course/allcourse')
+        const result = await axios.get('api/user/course/allcourse')
         setCourse(result.data)
         console.log(result.data)
     }
 
     const deleteCourse = async(_id)=>{
-        let response = await axios.delete(`http://localhost:8080/api/user/course/remove/${_id}`)
+        let response = await axios.delete(`api/user/course/remove/${_id}`)
         if(response)
         return alert('course deleted successfully')
         loadCourse()

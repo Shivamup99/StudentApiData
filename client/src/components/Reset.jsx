@@ -30,7 +30,7 @@ function Reset() {
   const submitForm = async() => {
       console.log(token.token)
    try {
-    const response = await axios.put('http://localhost:8080/api/user/resetpassword' ,({password:user.password, token:token.token}));
+    const response = await axios.put('api/user/resetpassword' ,({password:user.password, token:token.token}));
     alert('Password updated')
     console.log(response)
     history.push('/login')

@@ -8,7 +8,7 @@ function Subject() {
     },[])
 
     const loadcourse = async()=>{
-        let result = await axios.get(`http://localhost:8080/api/user/course/get/${ localStorage.getItem('_id')}`)
+        let result = await axios.get(`api/user/course/get/${ localStorage.getItem('_id')}`)
         setcourse(result.data.course)
         console.log(result.data.course)
     }
