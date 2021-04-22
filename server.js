@@ -1,21 +1,26 @@
-require('./models/db')
-require("express-async-errors")
-const error = require("./middleware/error")
+
 const express = require('express')
+const cors = require('cors')
+const app = express();
+ app.use(cors());
+ const error = require("./middleware/error")
 const multer = require('multer')
 const path=require('path')
-const cors = require('cors')
+
+
+require('./models/db')
+require("express-async-errors")
 const bodyParser = require('body-parser')
 const cookieParser = require('cookie-parser')
 const port = process.env.PORT || 8080
 const user = require("./controller/register")
 const record = require("./controller/user")
 const course = require("./controller/course")
-const app = express();
+
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended:true}))
 app.use(express.json())
-app.use(cors());
+
 app.use(cookieParser())
 app.use('/api/user',user)
 app.use('/api/user/data',record)
@@ -43,9 +48,9 @@ app.use(express.static(__dirname + '/public'));
 
  if(process.env.NODE_ENV=="production"){
      app.use(express.static("client/build"))
-     app.get("*",(req,res)=>{
-         res.sendFile(path.resolve(__dirname ,'client','build','index.html'))
-     })
+      app.get("*",(req,res)=>{
+          res.sendFile(path.resolve(__dirname ,'client','build','index.html'))
+      })
  }
 
 
