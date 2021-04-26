@@ -9,10 +9,6 @@ const courseSchema = new mongoose.Schema({
         type:String,
         required:true
     },
-    // status:{
-    //     type:Boolean,
-    //     default :false
-    // },
     created_at:{
         type:Date,
         default:Date.now()

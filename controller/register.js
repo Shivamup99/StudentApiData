@@ -33,7 +33,7 @@ const upload = multer({
     limits: {
         fileSize: 1024*1024*5
     },
-  //  fileFilter:fileFilter
+   // fileFilter:fileFilter
 })
 
 const validator=(req,res,next)=>{
@@ -75,7 +75,7 @@ const validator=(req,res,next)=>{
                     phone:req.body.phone,
                     department:req.body.department,
                     roles:roles
-                })
+                }) 
             const salt = await bcrypt.genSalt(15)
             user.password = await bcrypt.hash(user.password,salt)
             user.cpassword = await bcrypt.hash(user.cpassword,salt)
@@ -103,15 +103,27 @@ router.put("/update/:_id",upload.single('photo'), validator, [valid], async(req,
      res.status(422).json({message:error.message})
     } else{
         try {
-            const user = await User.findByIdAndUpdate(req.params._id,{
-                name:req.body.name,
-                email:req.body.email,
-                phone:req.body.phone,
-                photo:req.file.path,
-                department:req.body.department,
-            },{new:true})
-            await user.save()
-            res.status(200).json(user) 
+            if(req.file){
+                const user = await User.findByIdAndUpdate(req.params._id,{
+                    name:req.body.name,
+                    email:req.body.email,
+                    phone:req.body.phone,
+                    photo:req.file.path,
+                    department:req.body.department,
+                },{new:true})
+                await user.save()
+                res.status(200).json(user) 
+            } else{
+                const user = await User.findByIdAndUpdate(req.params._id,{
+                    name:req.body.name,
+                    email:req.body.email,
+                    phone:req.body.phone,
+                    department:req.body.department,
+                },{new:true})
+                await user.save()
+                res.status(200).json(user) 
+            }
+         
         } catch (error) {
             res.status(422).json({message:error.message})
         }
@@ -163,7 +175,7 @@ router.put("/forgot",async(req,res)=>{
     const {email} = req.body
     const user = await User.findOne({email:email})
     if(!user){
-        return res.status(200).json({
+        return res.status(400).json({
             message:'Email is wrong'
         })
     }
